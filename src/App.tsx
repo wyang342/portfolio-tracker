@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import "./App.css";
 
 function App() {
-  const [apiKey, setApiKey] = useState("");
+  const apiKeyRef = useRef<HTMLInputElement>(null);
 
-  function handleAPIChange(evt: React.FormEvent<HTMLInputElement>) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    setApiKey(evt.currentTarget.value);
+
+    if (!apiKeyRef) return;
+
+    const apiKey = apiKeyRef.current!.value;
+
+    localStorage.setItem("PTApiKey", apiKey);
   }
 
   return (
     <div className="App">
       <h1>Portfolio Tracker</h1>
 
-      <p>Enter API Key: </p>
-      <form>
-        <input type="text" value={apiKey} onChange={handleAPIChange} />
+      <form onSubmit={handleSubmit}>
+        <p>Enter API Key: </p>
+        <input type="text" ref={apiKeyRef} />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
