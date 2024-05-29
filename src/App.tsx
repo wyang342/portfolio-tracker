@@ -19,9 +19,9 @@ function App() {
       <h1>Portfolio Tracker</h1>
 
       <form onSubmit={handleSubmit}>
-        <p>Enter API Key: </p>
-        <input type="text" ref={apiKeyRef} />
-        <button type="submit">Submit</button>
+        <label htmlFor="api-key">API Key: </label>
+        <input type="text" ref={apiKeyRef} name="api-key" />
+        <button type="submit">Save</button>
       </form>
     </div>
   );
